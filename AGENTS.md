@@ -37,6 +37,7 @@ Prefer free, local, or open-source dependencies when they satisfy the requiremen
 Treat features as incomplete until the relevant implementation works end-to-end.
 
 For substantial work:
+
 1. implement the feature
 2. run relevant validation
 3. inspect the actual application when visual behavior is involved
