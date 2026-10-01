@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Save to ApplyFlow</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <span>↗</span>
+      <h1>ApplyFlow</h1>
+      <small>LOCAL CAPTURE</small>
+    </header>
+    <p>
+      Review what we found. You’ll confirm the details in your workspace before
+      anything is saved.
+    </p>
+    <div id="error" role="alert" hidden></div>
+    <form id="capture">
+      <label>Company<input name="company" required maxlength="500" /></label
+      ><label>Role title<input name="role" required maxlength="500" /></label
+      ><label>Location<input name="location" maxlength="500" /></label
+      ><label>Compensation<input name="compensation" maxlength="500" /></label
+      ><label>Job URL<input name="url" type="url" required /></label
+      ><label
+        >Job description<textarea
+          name="description"
+          rows="7"
+          maxlength="100000"
+        ></textarea></label
+      ><small id="capture-note">Reading the current page…</small>
+      <div class="buttons">
+        <button name="intent" value="Saved" type="submit">Save job</button
+        ><button name="intent" value="Applied" type="submit" class="secondary">
+          Mark as applied
+        </button>
+      </div>
+    </form>
+    <footer>
+      Requires ApplyFlow running at 127.0.0.1:3000.<br />No background scraping.
+      No cloud connection.
+    </footer>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

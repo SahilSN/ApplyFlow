@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS applications (id TEXT PRIMARY KEY, data TEXT NOT NULL CHECK(json_valid(data)));
+CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, application_id TEXT NOT NULL REFERENCES applications(id) ON DELETE CASCADE, at TEXT NOT NULL, kind TEXT NOT NULL, body TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS events_application ON events(application_id, at);
+CREATE TABLE IF NOT EXISTS documents (id TEXT PRIMARY KEY, name TEXT NOT NULL, type TEXT NOT NULL, demo INTEGER NOT NULL DEFAULT 0);
+CREATE TABLE IF NOT EXISTS versions (id TEXT PRIMARY KEY, document_id TEXT NOT NULL REFERENCES documents(id), version INTEGER NOT NULL, filename TEXT NOT NULL, mime TEXT NOT NULL, bytes BLOB NOT NULL, created_at TEXT NOT NULL, UNIQUE(document_id, version));
+CREATE TABLE IF NOT EXISTS attachments (application_id TEXT NOT NULL REFERENCES applications(id) ON DELETE CASCADE, version_id TEXT NOT NULL REFERENCES versions(id), attached_at TEXT NOT NULL, PRIMARY KEY(application_id, version_id));
+CREATE TABLE IF NOT EXISTS contacts (id TEXT PRIMARY KEY, data TEXT NOT NULL CHECK(json_valid(data)));
+CREATE TABLE IF NOT EXISTS interviews (id TEXT PRIMARY KEY, application_id TEXT NOT NULL REFERENCES applications(id) ON DELETE CASCADE, data TEXT NOT NULL CHECK(json_valid(data)));
+CREATE TABLE IF NOT EXISTS answers (id TEXT PRIMARY KEY, data TEXT NOT NULL CHECK(json_valid(data)));
+CREATE TABLE IF NOT EXISTS experiments (id TEXT PRIMARY KEY, data TEXT NOT NULL CHECK(json_valid(data)));
+CREATE TABLE IF NOT EXISTS settings (id TEXT PRIMARY KEY CHECK(id = 'main'), data TEXT NOT NULL CHECK(json_valid(data)));
+CREATE TABLE IF NOT EXISTS proposals (id TEXT PRIMARY KEY, application_id TEXT NOT NULL REFERENCES applications(id) ON DELETE CASCADE, data TEXT NOT NULL CHECK(json_valid(data)));
+PRAGMA user_version = 1;

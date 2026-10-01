@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Save to ApplyFlow",
+  "version": "1.0.0",
+  "description": "Review a job listing and save it to your private, local ApplyFlow workspace.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_title": "Save to ApplyFlow",
+    "default_popup": "popup.html"
+  }
+}
